@@ -1,8 +1,35 @@
 // simple node js server
 const http = require("http");
+const fs = require("fs");
 
 const server = http.createServer((req, res) => {
-  console.log(req);
+  res.setHeader("Content-Type", "text/html");
+  res.write("<html>");
+  res.write("<head><title>Complete Coding</title></head>");
+
+  if (req.url === "/") {
+    res.write("<h1>Welcome to Home page</h1>");
+    res.write('<form action="/submit-details" method="POST">');
+    res.write(
+      '<input type="text" id="name" name="name" placeholder="Enter your name"><br><br>',
+    );
+    res.write('<label for="gender">Gender:</label>');
+    res.write('<input type="radio" id="male" name="gender" value="male">');
+    res.write('<label for="male">Male</label>');
+    res.write('<input type="radio" id="female" name="gender" value="female">');
+    res.write('<label for="female">Female</label><br><br>');
+    res.write('<button type="submit">Submit</button>');
+    res.write("</form>");
+    return res.end();
+  } else if (
+    req.method == "POST" &&
+    req.url.toLowerCase() === "/submit-details"
+  ) {
+    fs.writeFileSync("user-details.txt", "Hii my name is Sanju Dayal");
+    res.statusCode = 302;
+    res.setHeader("Location", "/");
+    return res.end();
+  }
 });
 
 const PORT = 3000;
