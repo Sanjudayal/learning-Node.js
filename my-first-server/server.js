@@ -3,12 +3,11 @@ const http = require("http");
 const fs = require("fs");
 
 const server = http.createServer((req, res) => {
-  res.setHeader("Content-Type", "text/html");
-  res.write("<html>");
-  res.write("<head><title>Complete Coding</title></head>");
-
   if (req.url === "/") {
-    res.write("<h1>Welcome to Home page</h1>");
+    res.setHeader("Content-Type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>Complete Coding</title></head>");
+    res.write("<body> <h1>Welcome to Home page</h1>");
     res.write('<form action="/submit-details" method="POST">');
     res.write(
       '<input type="text" id="name" name="name" placeholder="Enter your name"><br><br>',
@@ -20,6 +19,7 @@ const server = http.createServer((req, res) => {
     res.write('<label for="female">Female</label><br><br>');
     res.write('<button type="submit">Submit</button>');
     res.write("</form>");
+    res.write("</body>");
     return res.end();
   } else if (
     req.method == "POST" &&
@@ -30,6 +30,10 @@ const server = http.createServer((req, res) => {
     res.setHeader("Location", "/");
     return res.end();
   }
+  res.setHeader("Content-Type", "text/html");
+  res.write("<html>");
+  res.write("<head><title>Complete Coding</title></head>");
+  res.write("<body> <h1>like share subscribe</h1></body>");
 });
 
 const PORT = 3000;
