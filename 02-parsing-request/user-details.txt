@@ -1,4 +1,4 @@
 {
-  "name": "someone's name",
-  "gender": "male"
+  "name": "sushmita",
+  "gender": "female"
 }
